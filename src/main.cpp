@@ -10,6 +10,7 @@
 #define AERATOR_START_PIN					0 // Interrupt pin
 #define AERATOR_STOP_PIN					1 // Interrupt pin
 #define SSR_CONTROLL_PIN					3 // Output pin == SSR input pin
+#define SSR_STATUS_PIN						4
 
 
 #define DEBOUNCE_TIME						500
@@ -44,6 +45,7 @@ void setup()
 {
 	digitalWrite(SSR_CONTROLL_PIN, LOW);
 	pinMode(SSR_CONTROLL_PIN, OUTPUT);
+	pinMode(SSR_STATUS_PIN, LOW);
 	pinMode(AERATOR_START_PIN, INPUT);
 	pinMode(AERATOR_STOP_PIN, INPUT);
 
@@ -70,4 +72,5 @@ void loop()
 
 
 	digitalWrite(SSR_CONTROLL_PIN, ssr_pin_status);
+	digitalWrite(SSR_STATUS_PIN, !ssr_pin_status);
 }
