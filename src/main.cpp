@@ -60,12 +60,12 @@ void setup()
 
 void loop()
 {
-	if(digitalRead(AERATOR_START_PIN) && !ssr_pin_status)
+	if(digitalRead(AERATOR_START_PIN) && !digitalRead(AERATOR_STOP_PIN))
 	{
 		ssr_pin_status = 1;
 	}
 
-	if(digitalRead(AERATOR_STOP_PIN) && ssr_pin_status)
+	if(digitalRead(AERATOR_STOP_PIN) && !digitalRead(AERATOR_START_PIN))
 	{
 		ssr_pin_status = 0;
 	}
