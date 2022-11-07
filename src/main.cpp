@@ -44,8 +44,9 @@ bool ssr_pin_status;
 void setup()
 {
 	digitalWrite(SSR_CONTROLL_PIN, LOW);
-	pinMode(SSR_CONTROLL_PIN, OUTPUT);
-	pinMode(SSR_STATUS_PIN, LOW);
+	digitalWrite(SSR_STATUS_PIN, LOW);
+	pinMode(SSR_CONTROLL_PIN, OUTPUT); 
+	pinMode(SSR_STATUS_PIN, OUTPUT);
 	pinMode(AERATOR_START_PIN, INPUT);
 	pinMode(AERATOR_STOP_PIN, INPUT);
 
@@ -60,17 +61,17 @@ void setup()
 
 void loop()
 {
-	if(digitalRead(AERATOR_START_PIN) && !digitalRead(AERATOR_STOP_PIN))
+	if(!digitalRead(AERATOR_START_PIN) && digitalRead(AERATOR_STOP_PIN))
 	{
 		ssr_pin_status = 1;
 	}
 
-	if(digitalRead(AERATOR_STOP_PIN) && !digitalRead(AERATOR_START_PIN))
+	if(!digitalRead(AERATOR_STOP_PIN) && digitalRead(AERATOR_START_PIN))
 	{
 		ssr_pin_status = 0;
 	}
 
 
 	digitalWrite(SSR_CONTROLL_PIN, ssr_pin_status);
-	digitalWrite(SSR_STATUS_PIN, !ssr_pin_status);
+	digitalWrite(SSR_STATUS_PIN, ssr_pin_status);
 }
